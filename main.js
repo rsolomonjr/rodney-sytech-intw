@@ -1,4 +1,10 @@
 // Please complete the below exercises preferrably using JQuery
+jQuery.fn.outerHTML = function() {
+   return jQuery('<div />').append(this.eq(0).clone()).html();
+};
+
+$('h1').append($('.close').outerHTML()); 
+$('span:nth-child(2)').remove('.close');
 
 // 1. Make each item's paragraph collapse/expand when the title is clicked
   $('.title').on("click", function(){
@@ -16,11 +22,6 @@ $('.close').on("click", function(){
 //    The title of the new item has to match the input value
 //    The new item should also have the same properties (collapse/expand and close) as the other items
 
-jQuery.fn.outerHTML = function() {
-   return jQuery('<div />').append(this.eq(0).clone()).html();
-};
-
-
 $('.add').click(function(e){
 	e.preventDefault(); 
 	$('.title').unbind(); 
@@ -32,14 +33,13 @@ $('.add').click(function(e){
 		
 		var newHElem = 'Title ' + (matched.length + 1);
 		$('.item-list').append($('.item:last').outerHTML()); 
-		$('.item:last h1').html(newHElem); 
+		$('.item:last h1').html(newHElem).append($('.close').outerHTML()); 
 
 		
 	} else{ /* else there is a value */ 
 		var newHElem = value; 
 		$('.item-list').append($('.item:last').outerHTML()); 
-		$('.item:last h1').html(newHElem); 
-
+		$('.item:last h1').html(newHElem).append($('.close').outerHTML()); 
 	}		
 
 	$('.title').on("click", function(){
@@ -55,3 +55,4 @@ $('.add').click(function(e){
 //    If the user clicks "Add New" and the input is empty, 
 //    the new item's title needs to default to Title {number} (ex: Title 6 or Title 7)
 //    depending on the number of items already on the page
+
